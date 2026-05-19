@@ -1,6 +1,10 @@
 import profile from './images/image.png'
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
+
+// contact section imports
+import emailjs from "@emailjs/browser";
+
 
 import {
   FaReact,
@@ -19,7 +23,7 @@ import {
 
 
 export default function PortfolioWebsite() {
-  
+
   const projects = [
     {
       title: "Coaching Management SaaS",
@@ -52,6 +56,36 @@ export default function PortfolioWebsite() {
     },
   ];
   const [isOpen, setIsOpen] = useState(false);
+
+  // Contact section logic
+  const form = useRef();
+  const [success, setSuccess] = useState("");
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "Ranjan Portfolio",
+        "template_1fsawcg",
+        form.current,
+        "1k49co_ISEaaqrMDL"
+      )
+      .then(
+        () => {
+          setSuccess("Message sent successfully!");
+
+          form.current.reset();
+
+          setTimeout(() => {
+            setSuccess("");
+          }, 3000);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+  };
 
   return (
     <div className="min-h-screen bg-black text-white font-sans">
@@ -148,8 +182,8 @@ export default function PortfolioWebsite() {
         className="flex items-center px-6 pt-28 py-20 bg-black relative overflow-hidden"
       >
         {/* Background Blur Effects */}
-        {/* <div className="absolute w-72 h-72 bg-purple-500/20 rounded-full blur-3xl top-0 left-0"></div> */}
-        {/* <div className="absolute w-72 h-72 bg-blue-500/20 rounded-full blur-3xl bottom-0 right-0"></div> */}
+        <div className="absolute w-72 h-72 bg-purple-500/20 rounded-full blur-3xl top-0 left-0"></div>
+        <div className="absolute w-72 h-72 bg-blue-500/20 rounded-full blur-3xl bottom-0 right-0"></div>
 
         <div className="max-w-5xl mx-auto w-full grid lg:grid-cols-2 gap-16 items-center relative z-10">
 
@@ -440,37 +474,74 @@ export default function PortfolioWebsite() {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h3 className="text-5xl font-bold mb-6">Let’s Work Together</h3>
+      <section
+        id="contact"
+        className="py-24 px-6 bg-black text-white"
+      >
 
-          <p className="text-gray-400 text-lg mb-10">
-            Have a project idea or want to collaborate? Feel free to contact me.
+        <div className="max-w-4xl mx-auto text-center">
+
+          <p className="text-purple-400 text-lg font-semibold tracking-[0.3em] uppercase mb-4">
+            Contact
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4">
-            <input
-              type="text"
-              placeholder="Your Name"
-              className="bg-white/5 border border-white/10 rounded-xl px-5 py-4 w-72 outline-none focus:border-purple-400"
-            />
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Let’s Work Together
+          </h2>
 
-            <input
-              type="email"
-              placeholder="Your Email"
-              className="bg-white/5 border border-white/10 rounded-xl px-5 py-4 w-72 outline-none focus:border-purple-400"
-            />
-          </div>
+          <p className="text-gray-400 text-lg mb-12">
+            Have a project idea or want to collaborate?
+          </p>
 
-          <textarea
-            placeholder="Your Message"
-            rows="5"
-            className="mt-4 w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-purple-400"
-          ></textarea>
+          <form
+            ref={form}
+            onSubmit={sendEmail}
+            className="space-y-5"
+          >
 
-          <button className="mt-6 bg-gradient-to-r from-purple-500 to-blue-500 px-8 py-4 rounded-full font-semibold hover:scale-105 transition">
-            Send Message
-          </button>
+            <div className="grid md:grid-cols-2 gap-5">
+
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                required
+                className="bg-white/5 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-purple-500"
+              />
+
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                required
+                className="bg-white/5 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-purple-500"
+              />
+
+            </div>
+
+            <textarea
+              name="message"
+              rows="6"
+              placeholder="Your Message"
+              required
+              className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-purple-500"
+            ></textarea>
+
+            <button
+              type="submit"
+              className="bg-gradient-to-r from-purple-500 to-blue-500 px-8 py-4 rounded-full font-semibold hover:scale-105 transition"
+            >
+              Send Message
+            </button>
+
+            {success && (
+              <p className="text-green-400">
+                {success}
+              </p>
+            )}
+
+          </form>
+
         </div>
       </section>
 
