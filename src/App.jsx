@@ -64,6 +64,15 @@ export default function PortfolioWebsite() {
   const sendEmail = (e) => {
     e.preventDefault();
 
+    const count =
+      Number(localStorage.getItem("messageCount")) || 0;
+
+    // Limit: 2 messages
+    if (count >= 2) {
+      alert("Message limit reached.");
+      return;
+    }
+
     emailjs
       .sendForm(
         "Ranjan Portfolio",
@@ -73,6 +82,13 @@ export default function PortfolioWebsite() {
       )
       .then(
         () => {
+
+          // Increase Count
+          localStorage.setItem(
+            "messageCount",
+            count + 1
+          );
+
           setSuccess("Message sent successfully!");
 
           form.current.reset();
@@ -86,6 +102,7 @@ export default function PortfolioWebsite() {
         }
       );
   };
+
 
   return (
     <div className="min-h-screen bg-black text-white font-sans">
