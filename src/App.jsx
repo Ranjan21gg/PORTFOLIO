@@ -100,7 +100,7 @@ export default function PortfolioWebsite() {
 
     emailjs
       .sendForm(
-        "Ranjan Portfolio",
+        "service_5kdlxgm",
         "template_1fsawcg",
         form.current,
         "1k49co_ISEaaqrMDL"
