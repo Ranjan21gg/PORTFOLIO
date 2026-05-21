@@ -60,6 +60,7 @@ export default function PortfolioWebsite() {
   // Contact section logic
   const form = useRef();
   const [success, setSuccess] = useState("");
+  const [isError, setIsError] = useState(false);
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -107,7 +108,6 @@ export default function PortfolioWebsite() {
       )
       .then(
         () => {
-
           // Save updated count
           localStorage.setItem(
             "messageLimit",
@@ -117,15 +117,24 @@ export default function PortfolioWebsite() {
             })
           );
 
+          setIsError(false);
           setSuccess("Message sent successfully!");
 
           form.current.reset();
 
           setTimeout(() => {
             setSuccess("");
-          }, 3000);
+          }, 2000);
         },
+
         (error) => {
+          setIsError(true);
+          setSuccess("Failed to send message!");
+
+          setTimeout(() => {
+            setSuccess("");
+          }, 2000);
+
           console.log(error.text);
         }
       );
@@ -580,7 +589,10 @@ export default function PortfolioWebsite() {
             </button>
 
             {success && (
-              <p className="text-green-400">
+              <p
+                className={`mt-4 font-medium ${isError ? "text-red-400" : "text-green-400"
+                  }`}
+              >
                 {success}
               </p>
             )}
