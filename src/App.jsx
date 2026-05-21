@@ -64,12 +64,37 @@ export default function PortfolioWebsite() {
   const sendEmail = (e) => {
     e.preventDefault();
 
-    const count =
-      Number(localStorage.getItem("messageCount")) || 0;
+    const now = Date.now();
+
+    // Get stored data
+    const storedData = JSON.parse(
+      localStorage.getItem("messageLimit")
+    );
+
+    let count = 0;
+    let firstTime = now;
+
+    // If data exists
+    if (storedData) {
+
+      count = storedData.count;
+      firstTime = storedData.firstTime;
+
+      // Reset after 12 hours
+      const twelveHours =
+        12 * 60 * 60 * 1000;
+
+      if (now - firstTime > twelveHours) {
+        count = 0;
+        firstTime = now;
+      }
+    }
 
     // Limit: 2 messages
     if (count >= 2) {
-      alert("Message limit reached.");
+      alert(
+        "Message limit reached. Try again after 12 hours."
+      );
       return;
     }
 
@@ -83,10 +108,13 @@ export default function PortfolioWebsite() {
       .then(
         () => {
 
-          // Increase Count
+          // Save updated count
           localStorage.setItem(
-            "messageCount",
-            count + 1
+            "messageLimit",
+            JSON.stringify({
+              count: count + 1,
+              firstTime,
+            })
           );
 
           setSuccess("Message sent successfully!");
@@ -144,7 +172,7 @@ export default function PortfolioWebsite() {
 
           {/* Hire Me Button */}
           <a href="#contact">
-            <button className="hidden md:block bg-gradient-to-r from-purple-500 to-blue-500 px-5 py-2.5 rounded-full font-medium hover:scale-105 hover:shadow-[0_0_20px_rgba(168,85,247,0.5)] transition duration-300">
+            <button className="hidden md:block bg-gradient-to-r from-purple-500 to-blue-500 px-5 py-2.5 rounded-full font-medium cursor-pointer hover:scale-105 hover:shadow-[0_0_20px_rgba(168,85,247,0.5)] transition duration-300">
               Hire Me
             </button>
           </a>
@@ -183,7 +211,7 @@ export default function PortfolioWebsite() {
             ))}
 
             <a href="#contact">
-              <button className="w-full mt-4 bg-gradient-to-r from-purple-500 to-blue-500 py-3 rounded-full font-medium">
+              <button className="cursor-pointer w-full mt-4 bg-gradient-to-r from-purple-500 to-blue-500 py-3 rounded-full font-medium">
                 Hire Me
               </button>
             </a>
@@ -231,7 +259,7 @@ export default function PortfolioWebsite() {
 
                 {/* Scroll To Projects */}
                 <a href="#projects">
-                  <button className="bg-gradient-to-r from-purple-500 to-blue-500 px-6 py-3 rounded-full font-medium hover:scale-105 transition">
+                  <button className="bg-gradient-to-r from-purple-500 to-blue-500 px-6 py-3 rounded-full font-medium cursor-pointer hover:scale-105 transition">
                     View Projects
                   </button>
                 </a>
@@ -243,7 +271,7 @@ export default function PortfolioWebsite() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <button className="border border-white/20 px-6 py-3 rounded-full font-medium hover:bg-white hover:text-black transition">
+                  <button className="border border-white/20 px-6 py-3 rounded-full font-medium cursor-pointer hover:bg-white hover:text-black transition">
                     Download CV
                   </button>
                 </a>
@@ -373,7 +401,7 @@ export default function PortfolioWebsite() {
                       rel="noopener noreferrer"
                       className="flex-1"
                     >
-                      <button className="w-full bg-gradient-to-r from-purple-500 to-blue-500 py-3 rounded-xl font-medium hover:shadow-[0_0_15px_rgba(168,85,247,0.6)] transition duration-300">
+                      <button className="w-full bg-gradient-to-r from-purple-500 to-blue-500 py-3 rounded-xl font-medium cursor-pointer hover:shadow-[0_0_15px_rgba(168,85,247,0.6)] transition duration-300">
                         Live Demo
                       </button>
                     </a>
@@ -384,7 +412,7 @@ export default function PortfolioWebsite() {
                       rel="noopener noreferrer"
                       className="flex-1"
                     >
-                      <button className="w-full border border-white/20 py-3 rounded-xl font-medium hover:bg-white hover:text-black transition">
+                      <button className="cursor-pointer w-full border border-white/20 py-3 rounded-xl font-medium hover:bg-white hover:text-black transition">
                         GitHub
                       </button>
                     </a>
@@ -546,7 +574,7 @@ export default function PortfolioWebsite() {
 
             <button
               type="submit"
-              className="bg-gradient-to-r from-purple-500 to-blue-500 px-8 py-4 rounded-full font-semibold hover:scale-105 transition"
+              className="cursor-pointer bg-gradient-to-r from-purple-500 to-blue-500 px-8 py-4 rounded-full font-semibold hover:scale-105 transition"
             >
               Send Message
             </button>
