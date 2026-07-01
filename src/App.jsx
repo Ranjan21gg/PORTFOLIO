@@ -31,8 +31,8 @@ export default function PortfolioWebsite() {
         "Multi-tenant coaching management platform with student management, attendance, fees, and analytics.",
       image: "/coaching.png",
       tech: ["React", "Django", "PostgreSQL"],
-      live: "https://your-live-site.com",
-      github: "https://github.com/yourusername/project1",
+      live: "https://instiflow-three.vercel.app/",
+      github: "https://github.com/Ranjan21gg/Coaching-Management-SaaS",
     },
 
     {
@@ -42,17 +42,7 @@ export default function PortfolioWebsite() {
       image: "/ipl.png",
       tech: ["React", "Python", "ML"],
       live: "https://your-live-site.com",
-      github: "https://github.com/yourusername/project2",
-    },
-
-    {
-      title: "Modern Portfolio",
-      description:
-        "Responsive developer portfolio website with animations and modern UI design.",
-      image: "/portfolio.png",
-      tech: ["React", "Tailwind", "Framer Motion"],
-      live: "https://your-live-site.com",
-      github: "https://github.com/yourusername/project3",
+      github: "https://github.com/Ranjan21gg/IPL-Data-Analysis",
     },
   ];
   const [isOpen, setIsOpen] = useState(false);
