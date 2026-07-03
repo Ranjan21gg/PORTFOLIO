@@ -80,7 +80,9 @@ export default function Navbar() {
                     ))}
 
                     <a href="#contact">
-                        <button className="cursor-pointer w-full mt-4 bg-linear-to-r from-purple-500 to-blue-500 py-3 rounded-full font-medium">
+                        <button className="cursor-pointer w-full mt-4 bg-linear-to-r from-purple-500 to-blue-500 py-3 rounded-full font-medium"
+                            onClick={() => setIsOpen(false)}
+                        >
                             Hire Me
                         </button>
                     </a>
