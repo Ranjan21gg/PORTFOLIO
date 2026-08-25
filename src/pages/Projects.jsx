@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function Projects() {
     const projects = [
         {
@@ -10,6 +8,16 @@ export default function Projects() {
             tech: ["React", "Django", "PostgreSQL", "Supabase", "Brevo API"],
             live: "https://instiflow-three.vercel.app/",
             github: "https://github.com/Ranjan21gg/Coaching-Management-SaaS",
+        },
+
+        {
+            title: "RuralKart — Local & Rural E-Commerce Platform",
+            description:
+                "A full-stack e-commerce platform for discovering, managing, and purchasing locally sourced products.",
+            image: "/RuralKart.png",
+            tech: ["React", "Python", "ML"],
+            live: "https://rural-kart-ecommerce.vercel.app/",
+            github: "https://github.com/Ranjan21gg/Rural-Kart-Ecommerce",
         },
 
         {
