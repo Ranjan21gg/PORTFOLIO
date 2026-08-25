@@ -15,7 +15,7 @@ export default function Projects() {
             description:
                 "A full-stack e-commerce platform for discovering, managing, and purchasing locally sourced products.",
             image: "/RuralKart.png",
-            tech: ["React", "Python", "ML"],
+            tech: ["React", "Python", "Postgresql (Neon)", "Docker", "CI/CD", "Redis", "Celery", "Razorpay Webhook - payment", "Cloudnary - Image Store"],
             live: "https://rural-kart-ecommerce.vercel.app/",
             github: "https://github.com/Ranjan21gg/Rural-Kart-Ecommerce",
         },
