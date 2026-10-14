@@ -1,4 +1,3 @@
-import { Component } from "lucide-react"
 import profile from "../images/image.png"
 
 
